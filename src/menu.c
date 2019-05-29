@@ -378,21 +378,19 @@ void ShowGameOver() {
 
     SetPenColor("Black");
 
-    if (Mybutton(GenUIID(0), x, y, w, h, "RETRY", 1)) {
-        gameover = 0;
-        Retry();
-//        DisplayClear();
-    }
-
     if (Mybutton(GenUIID(0), x, y - h * 1.5, w, h, "EXIT", 1)) {
         DataSave(data);
         ExitGraphics();
     }
 
+    if (Mybutton(GenUIID(0), x, y, w, h, "RETRY", 1)) {
+        gameover = 0;
+        Retry();
+    }
+
 }
 
 void display() {
-
 
 
     if (InMenu) {
