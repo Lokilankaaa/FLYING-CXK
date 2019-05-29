@@ -5,7 +5,6 @@
 #ifndef C_BIG_WORK_MENU_H
 #define C_BIG_WORK_MENU_H
 
-void DisplayClear(void);
 
 void drawMenu();
 
@@ -32,5 +31,7 @@ void display();
 char *NumberToChar(int n);
 
 void StartInterface();
+
+void drawTitle();
 
 #endif //C_BIG_WORK_MENU_H

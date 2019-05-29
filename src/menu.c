@@ -25,8 +25,8 @@ static double winwidth = 10, winheight = 7;
 
 extern char *NAME;
 extern PLAYERINFO *data;
-extern TIMESCORE;
-extern SCORE;
+extern int TIMESCORE;
+extern int SCORE;
 
 int InMenu = 1;
 int EnteringName = 0;
@@ -46,7 +46,7 @@ void drawMenu() {
                                    "Start",
                                    "Rank",
                                    "Exit | Ctrl-E"};
-    static char *menuListHelp[] = {"Help",
+    static char *menuListHelp[] = {"About",
                                    "Help | Ctrl-H",
                                    "About",
                                    "Donate"};
@@ -89,6 +89,38 @@ void drawMenu() {
     }
 }
 
+void drawTitle() {
+
+
+    char FLYING_CXK[10][2] = {"F", "L", "Y", "I", "N", "G", " ", "C", "X", "K"};
+    char *Colors[] = {"Red", "Orange", "MyOY", "Gold", "GreenYellow", "MyGB", "Black", "Blue", "MyPurple", "Magenta"};
+
+
+    DefineColor("Gold", 1, .85, 0);
+    DefineColor("GreenYellow", .7, 1, .19);
+    DefineColor("MyGB", 0, .75, .75);
+    DefineColor("MyOY", 1, .7, .1);
+    DefineColor("MyPurple", .7, .05, 1);
+
+
+    SetPointSize(48);
+
+
+    double fH = GetFontHeight();
+    double w = TextStringWidth("FLYING CXK");
+    double x = winwidth / 2 - w / 2;
+    double y = 6;
+
+    MovePen(x, y);
+
+    for (int i = 0; i < 10; i++) {
+            SetPenColor(Colors[i]);
+            DrawTextString(FLYING_CXK[i]);
+            MovePen(x += TextStringWidth(FLYING_CXK[i]), y);
+    }
+}
+
+
 void StartInterface() {
 
     SetPointSize(24);
@@ -97,9 +129,7 @@ void StartInterface() {
     double x;
     double y = 6;
 
-    SetPointSize(48);
-    x = GetWindowWidth() / 2 - TextStringWidth("FLYING CXK") / 2;
-    drawLabel(x, y, "FLYING CXK");
+    drawTitle();
 
     char *Labels[] = {
             "CXK精彩的唱，跳，Rap，篮球表演收获了许多粉丝",
@@ -153,6 +183,7 @@ void ShowHelpWindow() {
     SetPenColor("Black");
     SetPointSize(20);
     drawLabel(2, 3.5, "操作指南：空格-跳跃，Ctrl+E-退出游戏，F1-暂停，F2-继续");
+    drawLabel(3, 2.5, "在rank about help界面可按esc退出");
 
     if (PressESC()) {
         InHelpWindow = 0;
@@ -367,7 +398,6 @@ void ShowGameOver() {
     }
 
     SetPointSize(32);
-//    SetPenSize(4);
 
     double fH = GetFontHeight();
     double h = fH * 1.5;
@@ -387,6 +417,7 @@ void ShowGameOver() {
         gameover = 0;
         Retry();
     }
+
 
 }
 
